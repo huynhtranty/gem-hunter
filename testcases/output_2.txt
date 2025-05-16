@@ -1,0 +1,11 @@
+T, G, G, G, 1, 1, 2, T, G, G, G
+G, 2, G, G, 3, G, G, 2, G, G, G
+T, G, G, 2, T, 2, G, G, 3, T, G
+G, 3, T, G, 4, T, G, 2, T, G, 1
+1, G, 2, T, G, 2, 3, G, G, 1, G
+T, G, G, 3, G, G, G, 2, G, G, G
+2, G, G, G, 2, T, G, G, 3, T, G
+G, 2, T, G, G, 3, G, G, G, 2, G
+G, G, 2, G, G, G, 2, G, G, G, 1
+G, G, G, 1, G, T, G, 1, G, G, G
+G, G, G, G, 1, 1, 1, G, G, _, _
