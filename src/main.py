@@ -16,6 +16,26 @@ def main():
         print(f"Error: Testcases directory {testcases_dir} does not exist")
         sys.exit(1)
 
+    # Menu for algorithm selection
+    print("Choose the algorithm to solve the CNF:")
+    print("1. PySAT Solver")
+    print("2. Backtracking Solver")
+    print("3. Brute Force Solver")
+    algo_choice = input("Enter your choice (1/2/3): ").strip()
+
+    if algo_choice == '1':
+        solver_func = solve_pysat
+        solver_name = "PySAT"
+    elif algo_choice == '2':
+        solver_func = solve_backtrack
+        solver_name = "Backtracking"
+    elif algo_choice == '3':
+        solver_func = solve_brute_force
+        solver_name = "Brute Force"
+    else:
+        print("Invalid choice. Exiting.")
+        sys.exit(1)
+
     # Process all input files in testcases directory
     for filename in os.listdir(testcases_dir):
         if filename.startswith('input_') and filename.endswith('.txt'):
@@ -33,30 +53,18 @@ def main():
                 print(f"Error reading {input_path}: {e}")
                 continue
 
-            # Run and time PySAT solver
+            # Run and time selected solver
             start_time = time.time()
-            pysat_result = solve_pysat(grid)
-            pysat_time = time.time() - start_time
-
-            # Run and time Backtracking solver
-            start_time = time.time()
-            backtrack_result = solve_backtrack(grid)
-            backtrack_time = time.time() - start_time
-
-            # Run and time Brute Force solver
-            start_time = time.time()
-            brute_force_result = solve_brute_force(grid)
-            brute_force_time = time.time() - start_time
+            result = solver_func(grid)
+            elapsed_time = time.time() - start_time
 
             # Print timing results
-            print(f"PySAT Time: {pysat_time:.6f} seconds")
-            print(f"Backtracking Time: {backtrack_time:.6f} seconds")
-            print(f"Brute Force Time: {brute_force_time:.6f} seconds")
+            print(f"{solver_name} Time: {elapsed_time:.6f} seconds")
 
-            # Use PySAT result for output (assumed most reliable)
-            if pysat_result:
+            # Use result for output
+            if result:
                 try:
-                    write_grid(pysat_result, output_path)
+                    write_grid(result, output_path)
                     print(f"Solution written to output_{input_num}.txt")
                 except Exception as e:
                     print(f"Error writing {output_path}: {e}")
