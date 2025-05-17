@@ -33,22 +33,12 @@ def write_grid(grid, filename):
             row_str = [str(x) if x != 'G' and x != 'S' else 'T' if x == 'G' else 'G' for x in row]
             f.write(', '.join(row_str) + '\n')
 
-def is_valid_assignment(grid, i, j, value):
-    # Check if assigning value ('T' or 'G') at (i, j) is valid
-    if grid[i][j] != '_':
-        return False
-    # Temporarily assign value
-    original = grid[i][j]
-    grid[i][j] = value
-    # Check all numbered cells
-    for x in range(len(grid)):
-        for y in range(len(grid[0])):
-            if isinstance(grid[x][y], int):
-                adjacent = get_adjacent_cells(grid, x, y)
+def is_valid_solution(grid):
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if isinstance(grid[i][j], int):
+                adjacent = get_adjacent_cells(grid, i, j)
                 gems = sum(1 for ai, aj in adjacent if grid[ai][aj] == 'T')
-                unknowns = sum(1 for ai, aj in adjacent if grid[ai][aj] == '_')
-                if gems > grid[x][y] or (gems + unknowns < grid[x][y]):
-                    grid[i][j] = original
+                if gems != grid[i][j]:
                     return False
-    grid[i][j] = original
     return True

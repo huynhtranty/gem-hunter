@@ -59,7 +59,7 @@ def main():
             elapsed_time = time.time() - start_time
 
             # Print timing results
-            print(f"{solver_name} Time: {elapsed_time:.6f} seconds")
+            print(f"{solver_name} Time: {elapsed_time * 1000:.6f} ms")
 
             # Use result for output
             if result:

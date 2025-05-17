@@ -1,15 +1,5 @@
 from itertools import product
-from utils import get_adjacent_cells
-
-def is_valid_solution(grid):
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            if isinstance(grid[i][j], int):
-                adjacent = get_adjacent_cells(grid, i, j)
-                gems = sum(1 for ai, aj in adjacent if grid[ai][aj] == 'T')
-                if gems != grid[i][j]:
-                    return False
-    return True
+from utils import get_adjacent_cells, is_valid_solution
 
 def solve_brute_force(grid):
     grid = [row[:] for row in grid]
