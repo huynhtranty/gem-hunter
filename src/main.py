@@ -1,10 +1,14 @@
 import os
 import time
 import sys
+import concurrent.futures
 from pysat_sol import solve_pysat
 from backtrack_sol import solve_backtrack
 from brute_force_sol import solve_brute_force
 from utils import read_grid, write_grid
+
+class TimeoutException(Exception):
+    pass
 
 def main():
     # Get the testcases directory (one level up from src)
@@ -55,7 +59,18 @@ def main():
 
             # Run and time selected solver
             start_time = time.time()
-            result = solver_func(grid)
+            result = None
+            if algo_choice == '3':
+                # Set timeout for brute force (10 minutes = 600 seconds)
+                with concurrent.futures.ProcessPoolExecutor(max_workers=1) as executor:
+                    future = executor.submit(solver_func, grid)
+                    try:
+                        result = future.result(timeout=30)
+                    except concurrent.futures.TimeoutError:
+                        print("Brute Force Solver timed out after 10 minutes.")
+                        future.cancel()
+            else:
+                result = solver_func(grid)
             elapsed_time = time.time() - start_time
 
             # Print timing results
