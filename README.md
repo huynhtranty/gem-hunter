@@ -50,9 +50,9 @@ The program will:
 A game grid might look like:
 
 ```
-. 1 .
-. . .
-2 . .
+_ 1 _
+_ _ _
+2 _ _
 ```
 
 Where:
@@ -61,22 +61,6 @@ Where:
 
 You can modify the input grid in `data/board.txt` or a similar file depending on implementation.
 
-## Project Structure
-
-```bash
-gem-hunter/
-│
-├── main.py               # Entry point of the project
-├── cnf_generator.py      # Logic for generating CNF constraints
-├── solver.py             # SAT solver logic using PySAT
-├── brute_force.py        # Brute-force solver
-├── backtracking.py       # Backtracking solver
-├── utils.py              # Helper functions
-├── data/
-│   └── board.txt         # Sample board input file
-├── requirements.txt      # Python dependencies
-└── README.md             # Project documentation
-```
 
 ## Dependencies
 
